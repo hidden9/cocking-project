@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, useHistory } from 'react-router-dom';
+import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
 import Header from './header';
 
 
@@ -21,7 +21,9 @@ class SetCard extends React.Component {
                     <div className="card-body">
                         <h5 className="card-title">Card title</h5>
                         <p className="card-text">Some quick </p>
-                        <a href="#" className="btn btn-primary btn-sm" style={{ marginBottom: "10px" }}>view</a>
+                        
+                        <Link to="/foods/:id" className="btn btn-primary btn-sm" style={{ marginBottom: "10px" }} >view</Link>
+
                     </div>
 
                 </div>
@@ -41,10 +43,13 @@ class SetBigCard extends React.Component {
     }
 
 
+
+
+
     
     render() {
 
-        let history = useHistory();
+        
 
         
         
@@ -56,7 +61,9 @@ class SetBigCard extends React.Component {
                     <div class="navbar navbar-light">
                         <a class="navbar-brand text-dark">{this.props.HeaderLabel}</a>
                         <form class="form-inline">
-                            <button class="btn btn-outline-success my-1 mr-sm-3 " type="submit" onClick = {history.push('/foods')} >view all</button>
+                            
+                            <Link to="/foods" className="btn btn-outline-success my-1 mr-sm-3">View all</Link>
+                            
 
                         </form>
                     </div>
@@ -130,5 +137,14 @@ export default function Home() {
     </form>
 </div>
 </div>
+<a href="#" className="btn btn-primary btn-sm" style={{ marginBottom: "10px" }}>view</a>
+
+
+                <Switch>
+                    <Route exact path="/foods">
+                        <Foods />
+                    </Route>
+                </Switch>
+*/
 
 */
