@@ -1,12 +1,11 @@
 
 import React, { useState } from 'react';
 import Header from './header';
+import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
 
 class SetItem extends React.Component {
 
-    constructor(){
-        this.state = {}
-    }
+
 
     render() {
         return (
@@ -24,7 +23,9 @@ class SetItem extends React.Component {
                 <div class="text-center pt-4">
 
                     <h5>Food name</h5>
-                    <button className="btn btn-outline-primary btn-sm my-2">view food</button>
+                    
+
+                    <Link to="/foods/:id" className="btn btn-outline-primary btn-sm my-2" >view Food</Link>
 
                 </div>
 
@@ -82,6 +83,18 @@ export default function Foods() {
 
     );
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
