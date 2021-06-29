@@ -53,7 +53,7 @@ export default function SignUp() {
                             <br></br>
                             <br></br>
                             <br></br>
-                            <button  type="button" className="btn btn-success btn-md btn-block" disabled={!validateFormFields()} onClick={() => {history.push("/Login")}}>Sign up</button>
+                            <button  type="button" className="btn btn-success btn-md btn-block" disabled={!validateFormFields()} onClick={() => {history.push("/home")}}>Sign up</button>
                         </div>
                     </form>
 
@@ -65,4 +65,5 @@ export default function SignUp() {
 
         );
     }
+
 
