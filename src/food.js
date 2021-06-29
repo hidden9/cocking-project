@@ -5,24 +5,28 @@ import "./food.css"
 
 
 
-function Setlevels(event) {
+class Setlevels extends React.Component {
 
+    constructor (props){
+        super(props);
+        this.state =  {levels : this.props.levels}
+    }
 
-    const [levels, setLevels] = useState("");
-
-
-    return levels = setLevels(event.target.value)
+    render(){
+        return(<p>{this.state.levels}</p>);
+    }
 
 }
 
-function SetInformation(event) {
+class SetMaterials extends React.Component {
 
-
-    const [information, setInformation] = useState("");
-
-
-
-    return (information = setInformation(event.target.value));
+    constructor (props){
+        super(props);
+        this.state =  {materials : this.props.materials}
+    }
+    render(){
+        return(<p>{this.state.materials}</p>);
+    }
 
 }
 
@@ -91,9 +95,9 @@ class SetTexts extends React.Component {
                             Materials :
                         
                     </h4>
-                    <p>
-                        <p>{e => SetInformation(e.target.value)}</p>
-                    </p>
+
+                    <SetMaterials materials = "sample" />
+
                 </div>
                 <div class="product_meta">
 
@@ -104,15 +108,11 @@ class SetTexts extends React.Component {
                             
                         </h4>
 
-                        <p>
-                            {e => Setlevels(e.target.value)}
-                        </p>
+                        <Setlevels levels = "sample" />
 
                     </div>
 
-
                 </div>
-
 
             </div>
 
@@ -124,7 +124,6 @@ class SetTexts extends React.Component {
 export default function Food() {
 
     return (
-
 
         <div className='body bg-light' >
 
@@ -140,15 +139,19 @@ export default function Food() {
 
                 </div>
 
-
             </div>
 
         </div>
-
 
     );
 
 
 }
+
+
+
+
+
+
 
 
