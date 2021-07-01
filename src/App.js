@@ -8,17 +8,21 @@ import Signup from './signup';
 
 
 import './App.css';
+import New_recipe from "./new_recipe";
+
+var user;
 
 function App() {
   return (
     <Router>
       <div>
         <Switch>
-          <Route exact path='/foods' component={FeaturedFood} />
+          <Route exact path='/foods/*' component={FeaturedFood} />
           <Route exact path='/food/:id' component={Food} />
           <Route exact path='/' component={Home} />
           <Route exact path='/login' component={Login} />
           <Route exact path='/signup' component={Signup} />
+          <Route exact path='/new_recipe' component={New_recipe} />
 
 
         </Switch>

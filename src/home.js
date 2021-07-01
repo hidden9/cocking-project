@@ -5,16 +5,31 @@ import Header from "./header"
 
 
 const Home = () => {
-    const [products, setProducts] = useState([]);
+    const [recent, setRecent] = useState([]);
     useEffect(() => {
-        fetchProducts();
+        fetchRecent();
     }, []);
-    const fetchProducts = () => {
+    const fetchRecent = () => {
         axios
-            .get('https://shoppingapiacme.herokuapp.com/shopping')
+            .get('http://localhost:8000/api/recent')
             .then((res) => {
                 // console.log(res);
-                setProducts(res.data);
+                setRecent(res.data.slice(0, 6));
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+    const [popular, setPopular] = useState([]);
+    useEffect(() => {
+        fetchPopular();
+    }, []);
+    const fetchPopular = () => {
+        axios
+            .get('http://localhost:8000/api/popular')
+            .then((res) => {
+                // console.log(res);
+                setPopular(res.data.slice(0, 6));
             })
             .catch((err) => {
                 console.log(err);
@@ -32,10 +47,10 @@ const Home = () => {
                 <div className="card col-sm-12" >
                     <div className="card-header">
                         <div class="navbar navbar-light">
-                            <h4 class="navbar-brand text-dark">ff</h4>
+                            <h4 class="navbar-brand text-dark">Recent Recipes</h4>
                             <form class="form-inline">
 
-                                <Link to="/foods" className="btn btn-outline-success my-1 mr-sm-3">View all</Link>
+                                <Link to="/foods/recent" className="btn btn-outline-success my-1 mr-sm-3">View all</Link>
 
 
                             </form>
@@ -46,13 +61,12 @@ const Home = () => {
                     <div className=' card-body row' >
 
 
-                        {products.map((product) => (
-                            <div className='card col-sm-4 justify-content-center align-items-center  my-3 mt-3' key={product.id} style={{ margin: " auto", width: "400px" }}>
-                                <img className="my-3" src={product.image} alt='' />
-                                <h3>{product.brand}</h3>
-                                <p>{product.item}</p>
+                        {recent.map((recipe) => (
+                            <div className='card col-sm-4 justify-content-center align-items-center  my-3 mt-3' key={recipe.id} style={{ margin: " auto", width: "400px" }}>
+                                <img className="my-3" src={"https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"} alt='' />
+                                <h3>{recipe.name}</h3>
                                 <div class="d-grid gap-2">
-                                    <Link to={`/food/${product.id}`} type="button" className="btn btn-success  btn-block my-4" >View</Link>
+                                    <Link to={`/food/${recipe.id}`} type="button" className="btn btn-success  btn-block my-4" >View</Link>
                                 </div>
                             </div>
                         ))}
@@ -64,10 +78,10 @@ const Home = () => {
                 <div className="card col-sm-12" >
                     <div className="card-header">
                         <div class="navbar navbar-light">
-                            <h4 class="navbar-brand text-dark">ff</h4>
+                            <h4 class="navbar-brand text-dark">Popular Recipes</h4>
                             <form class="form-inline">
 
-                                <Link to="/foods" className="btn btn-outline-success my-1 mr-sm-3">View all</Link>
+                                <Link to="/foods/popular" className="btn btn-outline-success my-1 mr-sm-3">View all</Link>
 
 
                             </form>
@@ -78,13 +92,12 @@ const Home = () => {
                     <div className='row' >
 
 
-                        {products.map((product) => (
-                            <div className='card col-sm-4 justify-content-center align-items-center  my-3 mt-3' key={product.id} style={{ margin: " auto", width: "400px" }}>
-                                <img className="my-3" src={product.image} alt='' />
-                                <h3>{product.brand}</h3>
-                                <p>{product.item}</p>
+                        {popular.map((recipe) => (
+                            <div className='card col-sm-4 justify-content-center align-items-center  my-3 mt-3' key={recipe.id} style={{ margin: " auto", width: "400px" }}>
+                                <img className="my-3" src={"https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"} alt='' />
+                                <h3>{recipe.name}</h3>
                                 <div class="d-grid gap-2">
-                                    <Link to={`/food/${product.id}`} type="button" className="btn btn-success  btn-block my-4" >View</Link>
+                                    <Link to={`/food/${recipe.id}`} type="button" className="btn btn-success  btn-block my-4" >View</Link>
                                 </div>
                             </div>
                         ))}

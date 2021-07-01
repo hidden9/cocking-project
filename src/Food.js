@@ -11,14 +11,30 @@ const Food = ({ match }) => {
     const fetchProduct = () => {
         axios
             .get(
-                `https://shoppingapiacme.herokuapp.com/shopping/?id=${match.params.id}`
+                `http://localhost:8000/api/recipe/${match.params.id}`
             )
             .then((res) => {
                 setData(res.data);
-                console.log(res.data);
+                // console.log(res.data);
             })
             .catch((err) => console.log(err));
     };
+    const [author, setAuthor] = useState([]);
+    useEffect(() => {
+        fetchAuthor();
+    }, []);
+    const fetchAuthor = () => {
+        axios
+            .get(
+                `http://localhost:8000/api/recipe/author/${match.params.id}`
+            )
+            .then((res) => {
+                setAuthor(res.data[0].name);
+                // console.log(res.data);
+            })
+            .catch((err) => console.log(err));
+    };
+
     return (
         <div className = "bg-dark" >
             <Header />
@@ -32,13 +48,13 @@ const Food = ({ match }) => {
                                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                                     <div class="carousel-inner">
                                         <div class="carousel-item active my-3">
-                                            <img src={item.image} class="d-block w-100" alt="..." style={{ width: '400px', height: "400px" }} />
+                                            <img src={"https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"} class="d-block w-100" alt="..." style={{ width: '400px', height: "400px" }} />
                                         </div>
                                         <div class="carousel-item my-3">
-                                            <img src={item.image} class="d-block w-100" alt="..." style={{ width: '400px', height: "400px" }} />
+                                            <img src={"https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"} class="d-block w-100" alt="..." style={{ width: '400px', height: "400px" }} />
                                         </div>
                                         <div class="carousel-item my-3">
-                                            <img src={item.image} class="d-block w-100" alt="..." style={{ width: '400px', height: "400px" }} />
+                                            <img src={"https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"} class="d-block w-100" alt="..." style={{ width: '400px', height: "400px" }} />
                                         </div>
                                     </div>
                                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -54,14 +70,16 @@ const Food = ({ match }) => {
 
                         </div>
                         <div>
-                            <h1 className='brand my-5 text-light'>{item.brand}</h1>
+                            <h1 className='brand my-5 text-light'>{item.name}</h1>
                             <h2 className = "text-light">{item.item}</h2>
-                            <p className = "text-light">{item.description}</p>
                             <p className = "text-light">
-                                <strong >Price:</strong> {item.price}
+                                <strong >Author: </strong><br/>{author}
                             </p>
                             <p className = "text-light">
-                                <strong>Color:</strong> {item.color}
+                                <strong >Ingredients: </strong><br/>{item.ingredients}
+                            </p>
+                            <p className = "text-light">
+                                <strong>Steps: </strong><br/> {item.steps}
                             </p>
                         </div>
                     </div>
